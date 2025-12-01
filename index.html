@@ -1,0 +1,332 @@
+# Anime
+Player anime 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>masturbekTV | Каталог Аниме-Сериалов</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
+
+    <style>
+        /* --- Цветовая Палитра "Японский Неон" --- */
+        :root {
+            --primary-bg: #1a001a; 
+            --secondary-bg: #2e002e; 
+            --accent-color: #ff007f; /* Неоново-Малиновый (Hot Pink) */
+            --text-color: #f0f0f0; 
+            --highlight-color: #ff99cc; 
+            --font-family: 'Arial', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Общие элементы --- */
+        .section {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        h2 strong {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* --- Навигация и Шапка (Header) --- */
+        .header {
+            background-color: var(--primary-bg);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-shadow: 0 0 5px var(--highlight-color);
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 1.1em;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 5px var(--accent-color);
+        }
+
+        /* --- Каталог Аниме --- */
+        #catalog {
+            background-color: var(--secondary-bg);
+        }
+        
+        /* ... (Стили каталога остались без изменений) ... */
+        .anime-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .anime-card {
+            background-color: var(--primary-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 280px;
+            text-align: left;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .anime-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--accent-color);
+        }
+
+        .anime-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-info {
+            padding: 15px;
+        }
+
+        .card-info h3 {
+            margin-bottom: 5px;
+            font-size: 1.3em;
+        }
+
+        .card-info .rating {
+            color: var(--highlight-color);
+            font-weight: bold;
+        }
+
+        .card-info p {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        /* --- Страница Просмотра (Video.js Styles) --- */
+        #watch-page {
+            background-color: var(--primary-bg);
+            padding: 50px 5%;
+        }
+
+        /* Контейнер для плеера, чтобы он занимал всю доступную ширину */
+        .video-container {
+            max-width: 1000px;
+            margin: 0 auto 30px;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+        }
+
+        .embed-instruction {
+            padding: 20px;
+            background-color: var(--secondary-bg);
+            border-radius: 8px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .embed-instruction code {
+            display: block;
+            background: #000;
+            padding: 10px;
+            border-radius: 5px;
+            color: var(--accent-color);
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+
+        /* --- Адаптивность --- */
+        @media (max-width: 768px) {
+            /* ... (Стили адаптивности остались без изменений) ... */
+            .nav { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background-color: var(--primary-bg); border-top: 1px solid var(--secondary-bg); }
+            .nav.active { display: flex; }
+            .nav a { margin: 10px 0; padding: 10px 20px; text-align: center; }
+            .menu-toggle { display: block; background: none; border: none; color: var(--text-color); font-size: 1.5em; cursor: pointer; }
+            .anime-card { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">masturbekTV</div>
+        <nav class="nav">
+            <a href="#hero">Главная</a>
+            <a href="#catalog">Каталог</a>
+            <a href="#watch-page">Плеер</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
+    </header>
+
+    <section id="hero" class="section" style="padding-top: 120px; padding-bottom: 120px; background-image: linear-gradient(rgba(26, 0, 26, 0.85), rgba(26, 0, 26, 0.85)), url('https://picsum.photos/1920/800?random=2');">
+        <h1>Добро пожаловать в **masturbekTV**</h1>
+        <p style="font-size: 1.5em; color: var(--highlight-color); margin-bottom: 30px;">
+            Твой портал в мир лучших аниме-сериалов. Смотри и наслаждайся!
+        </p>
+        <a href="#catalog" class="cta-button" style="background-color: var(--accent-color); color: var(--primary-bg); padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+            Смотреть Каталог
+        </a>
+    </section>
+
+    <section id="catalog" class="section">
+        <h2>Наш **Каталог**</h2>
+        <div class="anime-grid">
+            
+            <a href="#watch-page" class="anime-card">
+                <img src="https://picsum.photos/300/350?random=3" alt="Аниме 1 Постер">
+                <div class="card-info">
+                    <h3>Самурайский Робот Z-01</h3>
+                    <p class="rating">⭐️ 9.2</p>
+                    <p>Жанр: Меха, Фантастика</p>
+                </div>
+            </a>
+
+            <a href="#watch-page" class="anime-card">
+                <img src="https://picsum.photos/300/350?random=4" alt="Аниме 2 Постер">
+                <div class="card-info">
+                    <h3>Воины Небесного Света</h3>
+                    <p class="rating">⭐️ 8.7</p>
+                    <p>Жанр: Фэнтези, Приключения</p>
+                </div>
+            </a>
+
+            <a href="#watch-page" class="anime-card">
+                <img src="https://picsum.photos/300/350?random=5" alt="Аниме 3 Постер">
+                <div class="card-info">
+                    <h3>Токийский Вампир</h3>
+                    <p class="rating">⭐️ 9.5</p>
+                    <p>Жанр: Хоррор, Мистика</p>
+                </div>
+            </a>
+            
+        </div>
+    </section>
+
+    <section id="watch-page" class="section">
+        <h2>**Смотреть** Серию (Демо)</h2>
+
+        <div class="embed-instruction">
+            <h3>Инструкция: Загрузка Видео</h3>
+            <p>
+                Ниже находится **Video.js плеер**. Чтобы он заработал, вам нужно загрузить свой видеофайл (например, <code>episode1.mp4</code>) в ту же папку, что и <code>index.html</code>, и убедиться, что его имя совпадает со ссылкой ниже.
+            </p>
+        </div>
+
+        <div class="video-container">
+            <video
+                id="my-video"
+                class="video-js vjs-default-skin vjs-big-play-centered"
+                controls
+                preload="auto"
+                width="1000"
+                height="500"
+                poster="https://picsum.photos/1000/500?grayscale"
+                data-setup='{"playbackRates": [0.5, 1, 1.5, 2]}'
+            >
+                <source src="episode1.mp4" type="video/mp4" /> 
+                <p class="vjs-no-js">
+                    Для просмотра видео, пожалуйста, включите JavaScript или обновите браузер.
+                </p>
+            </video>
+            </div>
+
+        <div class="embed-instruction">
+            <p>
+                **Video.js** поддерживает: **контроль скорости** (0.5x, 1x, 1.5x, 2x), качество, полноэкранный режим. Все это доступно через кнопку настроек (шестеренка) в плеере.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="section" style="background-color: var(--secondary-bg);">
+        <h2>**Связь** с нами</h2>
+        <p>Свяжись с создателем проекта напрямую!</p>
+        
+        <a href="https://wa.me/7755026706" class="cta-button" target="_blank" style="background-color: var(--accent-color); color: var(--primary-bg); padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">
+            <i class="fab fa-whatsapp"></i> WhatsApp: +7 755 026 706
+        </a>
+
+        <div class="social-links">
+            <a href="https://www.instagram.com/dunge0nmaster0" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://t.me/venizeois" target="_blank" aria-label="Telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 masturbekTV. Создано с любовью к аниме.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav');
+            const navLinks = document.querySelectorAll('.nav a');
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (nav.classList.contains('active')) {
+                        setTimeout(() => {
+                            nav.classList.remove('active');
+                        }, 100); 
+                    }
+                });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

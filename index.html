@@ -9,17 +9,14 @@ Player anime
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
-    <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
-
     <style>
-        /* --- Цветовая Палитра "Японский Неон" --- */
+        /* --- Цветовая Палитра "Киберпанк-Неон" --- */
         :root {
-            --primary-bg: #1a001a; 
-            --secondary-bg: #2e002e; 
+            --primary-bg: #0d001a; /* Глубокий темный фиолетовый/черный */
+            --secondary-bg: #1f0033; /* Чуть светлее для секций */
             --accent-color: #ff007f; /* Неоново-Малиновый (Hot Pink) */
             --text-color: #f0f0f0; 
-            --highlight-color: #ff99cc; 
+            --highlight-color: #ff99cc; /* Более мягкий розовый для свечения */
             --font-family: 'Arial', sans-serif;
         }
 
@@ -43,141 +40,218 @@ Player anime
             text-align: center;
         }
 
-        h2 strong {
-            color: var(--accent-color);
-            text-shadow: 0 0 10px var(--accent-color);
+        h2 {
+            font-size: 3em;
+            margin-bottom: 50px;
+            text-transform: uppercase;
         }
 
+        h2 strong {
+            color: var(--accent-color);
+            text-shadow: 0 0 15px var(--accent-color); /* Усиленный Неоновый эффект */
+        }
+        
         /* --- Навигация и Шапка (Header) --- */
         .header {
             background-color: var(--primary-bg);
-            padding: 15px 5%;
+            padding: 18px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 2px solid var(--accent-color);
+            border-bottom: 3px solid var(--accent-color); 
         }
 
         .logo {
-            font-size: 1.8em;
+            font-size: 2em;
             font-weight: bold;
             color: var(--accent-color);
-            text-shadow: 0 0 5px var(--highlight-color);
+            text-shadow: 0 0 8px var(--highlight-color);
+            letter-spacing: 2px;
         }
 
         .nav a {
             color: var(--text-color);
             text-decoration: none;
-            margin-left: 25px;
+            margin-left: 30px;
             font-size: 1.1em;
             transition: color 0.3s, text-shadow 0.3s;
         }
 
         .nav a:hover {
             color: var(--accent-color);
-            text-shadow: 0 0 5px var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* --- Секция Hero (Главная) --- */
+        #hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-size: cover;
+            background-position: center;
+            /* Стилизованный фон для киберпанка */
+            background-image: linear-gradient(rgba(13, 0, 26, 0.9), rgba(13, 0, 26, 0.9)), url('https://picsum.photos/1920/1080?random=1&blur=2');
+        }
+
+        #hero h1 {
+            font-size: 4.5em;
+            color: var(--accent-color);
+            text-shadow: 0 0 20px var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        #hero p {
+            font-size: 1.8em;
+            color: var(--highlight-color);
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 8px;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.7);
+        }
+
+        .cta-button:hover {
+            background-color: #ff3399;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--accent-color);
+        }
+        
+        /* --- Секция О Проекте --- */
+        #about {
+            background-color: var(--secondary-bg);
+        }
+        
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
         }
 
         /* --- Каталог Аниме --- */
         #catalog {
-            background-color: var(--secondary-bg);
+            background-color: var(--primary-bg);
         }
         
-        /* ... (Стили каталога остались без изменений) ... */
         .anime-grid {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
             flex-wrap: wrap;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
         .anime-card {
-            background-color: var(--primary-bg);
+            background-color: var(--secondary-bg);
             border-radius: 10px;
             overflow: hidden;
             width: 280px;
             text-align: left;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--secondary-bg);
+            box-shadow: 0 0 8px rgba(255, 0, 127, 0.3);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
 
         .anime-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px var(--accent-color);
+            transform: translateY(-8px);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 30px var(--accent-color);
         }
-
-        .anime-card img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            display: block;
-        }
-
+        
         .card-info {
             padding: 15px;
         }
-
-        .card-info h3 {
-            margin-bottom: 5px;
-            font-size: 1.3em;
-        }
-
-        .card-info .rating {
-            color: var(--highlight-color);
-            font-weight: bold;
-        }
-
-        .card-info p {
-            font-size: 0.9em;
-            color: #ccc;
-        }
-
-        /* --- Страница Просмотра (Video.js Styles) --- */
+        
+        /* --- Секция Плеера/Инструкции --- */
         #watch-page {
-            background-color: var(--primary-bg);
-            padding: 50px 5%;
+            background-color: var(--secondary-bg);
         }
 
-        /* Контейнер для плеера, чтобы он занимал всю доступную ширину */
         .video-container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto 30px;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+            position: relative;
+            padding-bottom: 56.25%; /* Соотношение 16:9 */
+            height: 0;
+            overflow: hidden;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.7);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         .embed-instruction {
             padding: 20px;
-            background-color: var(--secondary-bg);
+            background-color: var(--primary-bg);
             border-radius: 8px;
-            max-width: 1000px;
-            margin: 0 auto;
+            max-width: 900px;
+            margin: 30px auto 0;
             text-align: left;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        /* --- Контакты и Футер --- */
+        #contact {
+            background-color: var(--primary-bg);
+        }
+        
+        /* ... (Стили контактов без изменений) ... */
+        .social-links {
+            margin-top: 30px;
         }
 
-        .embed-instruction code {
-            display: block;
-            background: #000;
-            padding: 10px;
-            border-radius: 5px;
+        .social-links a {
+            color: var(--text-color);
+            font-size: 2.5em;
+            margin: 0 20px;
+        }
+
+        .social-links a:hover {
             color: var(--accent-color);
-            margin-top: 10px;
-            overflow-x: auto;
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .footer {
+            background-color: #000;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #9e9e9e;
         }
 
         /* --- Адаптивность --- */
         @media (max-width: 768px) {
-            /* ... (Стили адаптивности остались без изменений) ... */
-            .nav { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background-color: var(--primary-bg); border-top: 1px solid var(--secondary-bg); }
+            .nav { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background-color: var(--primary-bg); border-top: 1px solid var(--secondary-bg); }
             .nav.active { display: flex; }
-            .nav a { margin: 10px 0; padding: 10px 20px; text-align: center; }
-            .menu-toggle { display: block; background: none; border: none; color: var(--text-color); font-size: 1.5em; cursor: pointer; }
+            .menu-toggle { display: block; background: none; border: none; color: var(--text-color); font-size: 1.8em; cursor: pointer; }
+            #hero h1 { font-size: 3em; }
+            #hero p { font-size: 1.2em; }
+            h2 { font-size: 2.2em; }
             .anime-card { width: 100%; }
         }
     </style>
@@ -186,35 +260,49 @@ Player anime
 
     <header class="header">
         <div class="logo">masturbekTV</div>
+        <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
         <nav class="nav">
             <a href="#hero">Главная</a>
             <a href="#catalog">Каталог</a>
-            <a href="#watch-page">Плеер</a>
+            <a href="#about">О Проекте</a>
+            <a href="#watch-page">Смотреть</a>
             <a href="#contact">Контакты</a>
         </nav>
-        <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
     </header>
 
-    <section id="hero" class="section" style="padding-top: 120px; padding-bottom: 120px; background-image: linear-gradient(rgba(26, 0, 26, 0.85), rgba(26, 0, 26, 0.85)), url('https://picsum.photos/1920/800?random=2');">
-        <h1>Добро пожаловать в **masturbekTV**</h1>
-        <p style="font-size: 1.5em; color: var(--highlight-color); margin-bottom: 30px;">
-            Твой портал в мир лучших аниме-сериалов. Смотри и наслаждайся!
-        </p>
-        <a href="#catalog" class="cta-button" style="background-color: var(--accent-color); color: var(--primary-bg); padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold;">
-            Смотреть Каталог
+    <section id="hero" class="section">
+        <h1>Твой Портал в **Мир Аниме**</h1>
+        <p>Тысячи тайтлов, неоновый стиль, максимальная скорость!</p>
+        <a href="#catalog" class="cta-button">
+            Начать Смотреть
         </a>
+    </section>
+    
+    <section id="about" class="section">
+        <h2>Почему **masturbekTV**?</h2>
+        <div class="about-content">
+            <p>
+                **masturbekTV** – это не просто каталог, это твоя личная зона для погружения в японскую анимацию. Мы создали это пространство, чтобы тебе было максимально удобно находить и смотреть любимые сериалы.
+            </p>
+            <p>
+                Мы знаем, как важно качество и скорость. Поэтому наша платформа разработана так, чтобы работать молниеносно даже на GitHub Pages. А благодаря **встраиваемым плеерам** от лучших хостингов, ты получаешь полный контроль над просмотром, включая скорость и качество.
+            </p>
+            <p>
+                **Наша миссия:** дать тебе доступ к миру аниме без лишних проблем. Просто выбери тайтл и наслаждайся!
+            </p>
+        </div>
     </section>
 
     <section id="catalog" class="section">
-        <h2>Наш **Каталог**</h2>
+        <h2>**Популярное** Сейчас</h2>
         <div class="anime-grid">
             
             <a href="#watch-page" class="anime-card">
                 <img src="https://picsum.photos/300/350?random=3" alt="Аниме 1 Постер">
                 <div class="card-info">
-                    <h3>Самурайский Робот Z-01</h3>
-                    <p class="rating">⭐️ 9.2</p>
-                    <p>Жанр: Меха, Фантастика</p>
+                    <h3>Неоновые Стражи (S01)</h3>
+                    <p class="rating" style="color: var(--accent-color); font-size: 1.1em;">⭐️ 9.4 | 24 серии</p>
+                    <p>Жанр: Киберпанк, Экшн. Самый популярный тайтл этого сезона!</p>
                 </div>
             </a>
 
@@ -222,8 +310,8 @@ Player anime
                 <img src="https://picsum.photos/300/350?random=4" alt="Аниме 2 Постер">
                 <div class="card-info">
                     <h3>Воины Небесного Света</h3>
-                    <p class="rating">⭐️ 8.7</p>
-                    <p>Жанр: Фэнтези, Приключения</p>
+                    <p class="rating">⭐️ 8.7 | 12 серий</p>
+                    <p>Жанр: Фэнтези, Приключения. Классика, которую должен видеть каждый.</p>
                 </div>
             </a>
 
@@ -231,8 +319,26 @@ Player anime
                 <img src="https://picsum.photos/300/350?random=5" alt="Аниме 3 Постер">
                 <div class="card-info">
                     <h3>Токийский Вампир</h3>
-                    <p class="rating">⭐️ 9.5</p>
-                    <p>Жанр: Хоррор, Мистика</p>
+                    <p class="rating">⭐️ 9.5 | 36 серий</p>
+                    <p>Жанр: Хоррор, Мистика. Мрачный мир, который затянет тебя.</p>
+                </div>
+            </a>
+
+            <a href="#watch-page" class="anime-card">
+                <img src="https://picsum.photos/300/350?random=6" alt="Аниме 4 Постер">
+                <div class="card-info">
+                    <h3>Магическая Школа</h3>
+                    <p class="rating">⭐️ 8.1 | 13 серий</p>
+                    <p>Жанр: Сёнен, Комедия. Легкий и веселый сериал для отдыха.</p>
+                </div>
+            </a>
+
+            <a href="#watch-page" class="anime-card">
+                <img src="https://picsum.photos/300/350?random=7" alt="Аниме 5 Постер">
+                <div class="card-info">
+                    <h3>Космический Пират 99</h3>
+                    <p class="rating">⭐️ 9.0 | 50 серий</p>
+                    <p>Жанр: Космоопера, Ретро. Аниме в духе старой школы.</p>
                 </div>
             </a>
             
@@ -242,43 +348,41 @@ Player anime
     <section id="watch-page" class="section">
         <h2>**Смотреть** Серию (Демо)</h2>
 
-        <div class="embed-instruction">
-            <h3>Инструкция: Загрузка Видео</h3>
-            <p>
-                Ниже находится **Video.js плеер**. Чтобы он заработал, вам нужно загрузить свой видеофайл (например, <code>episode1.mp4</code>) в ту же папку, что и <code>index.html</code>, и убедиться, что его имя совпадает со ссылкой ниже.
-            </p>
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
+                title="Рабочий Плеер" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen
+            ></iframe>
         </div>
 
-        <div class="video-container">
-            <video
-                id="my-video"
-                class="video-js vjs-default-skin vjs-big-play-centered"
-                controls
-                preload="auto"
-                width="1000"
-                height="500"
-                poster="https://picsum.photos/1000/500?grayscale"
-                data-setup='{"playbackRates": [0.5, 1, 1.5, 2]}'
-            >
-                <source src="episode1.mp4" type="video/mp4" /> 
-                <p class="vjs-no-js">
-                    Для просмотра видео, пожалуйста, включите JavaScript или обновите браузер.
-                </p>
-            </video>
-            </div>
-
         <div class="embed-instruction">
+            <h3>Как получить плеер с настройками (скорость/качество)?</h3>
             <p>
-                **Video.js** поддерживает: **контроль скорости** (0.5x, 1x, 1.5x, 2x), качество, полноэкранный режим. Все это доступно через кнопку настроек (шестеренка) в плеере.
+                1. Загрузите ваше аниме на **YouTube, Vimeo, Dailymotion** или специализированный видеохостинг.
+            </p>
+            <p>
+                2. На странице вашего видео найдите функцию **"Поделиться"** или **"Встроить" (Embed)**.
+            </p>
+            <p>
+                3. Скопируйте предоставленный HTML-код, который начинается с тега <code>&lt;iframe ...&gt;</code>.
+            </p>
+            <p>
+                4. **Вставьте этот код** прямо внутри тега <code>&lt;div class="video-container"&gt;</code>, заменив текущую заглушку YouTube.
+            </p>
+            <p style="color: var(--accent-color); font-weight: bold;">
+                Плееры YouTube и Vimeo автоматически поддерживают контроль скорости и настроек!
             </p>
         </div>
     </section>
 
-    <section id="contact" class="section" style="background-color: var(--secondary-bg);">
+    <section id="contact" class="section">
         <h2>**Связь** с нами</h2>
-        <p>Свяжись с создателем проекта напрямую!</p>
+        <p>Если у тебя есть вопросы по сайту, коду или контенту, пиши!</p>
         
-        <a href="https://wa.me/7755026706" class="cta-button" target="_blank" style="background-color: var(--accent-color); color: var(--primary-bg); padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">
+        <a href="https://wa.me/7755026706" class="cta-button" target="_blank" style="background-color: var(--accent-color); color: var(--primary-bg); display: inline-block;">
             <i class="fab fa-whatsapp"></i> WhatsApp: +7 755 026 706
         </a>
 
